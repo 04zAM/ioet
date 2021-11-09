@@ -8,20 +8,18 @@ const regexp = /[=\n]/;
 /**
  * Read the data given from a schedule.txt file
  */
-function readData() {
-  fs.readFile("./schedule.txt", "utf8", (err, data) => {
-    if (err) {
-      console.error(err);
-      return;
-    }
-    // Removing blank spaces and spliting the data
-    let splited_data = data.toString().replace(" ", "").split(regexp);
-    pushData(splited_data);
-  });
-}
+fs.readFile("./input.txt", "utf8", (err, data) => {
+  if (err) {
+    console.error(err);
+    return;
+  }
+  // Removing blank spaces and spliting the data
+  let splited_data = data.toString().replace(" ", "").split(regexp);
+  pushData(splited_data);
+});
 
 /**
- * Iterates between the read data and creating an array of schedules 
+ * Iterates between the read data and creating an array of schedules
  * @param {*} data splited data
  */
 function pushData(data) {
@@ -46,31 +44,40 @@ function pushData(data) {
  */
 function outputTable(data) {
   var output_table = new Array();
-  // Iterating between the array
-  for (let i = 0; i < data.length; i++) {
-    const name1 = data[i].getName;
-    for (let j = 0; j < data.length; j++) {
-      const name2 = data[j].getName;
+  // Iterating between the shedule array twice
+  data.map((sch1) => {
+    const name1 = sch1.getName;
+    data.map((sch2) => {
+      const name2 = sch2.getName;
+      let counter = 0;
       // Comparing if the names are not the same ones
       if (name1 !== name2) {
-        var counter = 0;
-        for (let k = 0; k < data[i].getSchedule.length; k++) {
-          // Comparing if i schedule contains any of j schedule
-          if (data[i].getSchedule.includes(data[j].getSchedule[k])) {
-            counter++;
-          }
-        }
+        sch1.getSchedule.map((days1) => {
+          const day1 = days1.toString().substring(0, 2);
+          const entrance1 = days1.toString().substring(2).split("-")[0];
+          const exit1 = days1.toString().substring(2).split("-")[1];
+          sch2.getSchedule.map((days2) => {
+            const day2 = days2.toString().substring(0, 2);
+            const entrance2 = days2.toString().substring(2).split("-")[0];
+            const exit2 = days2.toString().substring(2).split("-")[1];
+            if (day1 === day2) {
+              if (
+                (entrance1 >= entrance2 && entrance1 < exit2) ||
+                (entrance2 >= entrance1 && entrance2 < exit1)
+              ) {
+                counter++;
+              }
+            }
+          });
+        });
         // Pushing to the output array
         output_table.push({
           pair: name1 + "-" + name2,
           counter,
         });
       }
-    }
-    // Removing the first element of the stack
+    });
     data.shift();
-  }
+  });
   return output_table;
 }
-
-readData();

@@ -1,10 +1,6 @@
-# Node.js / io.js Stream Primer
+# ioet Programing Test
 
-> [http://youtu.be/yOSNQZm3Trw](http://youtu.be/yOSNQZm3Trw)
-
-Install [io.js](https://iojs.org/en/index.html) or [node.js](https://nodejs.org/).
-
-Within this folder run the terminal command `npm install` to install the
-`dependencies` and `devDependencies`.
+Install [node.js](https://nodejs.org/).
 
 Then run `npm start` to run the app.
+Run `npm install` then `npm run test` for testing
