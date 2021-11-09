@@ -5,11 +5,11 @@
   "main": "index.js",
   "scripts": {
     "start": "node ./index",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/04zAM/ioet-test.git"
+    "url": "git+https://github.com/04zAM/ioet.git"
   },
   "keywords": [
     "shcedule"
@@ -17,7 +17,10 @@
   "author": "Patricio Esteban Vasquez Calero",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/04zAM/ioet-test/issues"
+    "url": "https://github.com/04zAM/ioet/issues"
   },
-  "homepage": "https://github.com/04zAM/ioet-test#readme"
+  "homepage": "https://github.com/04zAM/ioet#readme",
+  "devDependencies": {
+    "jest": "^27.3.1"
+  }
 }
