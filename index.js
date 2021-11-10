@@ -1,40 +1,31 @@
-// Third party modules
 const fs = require("fs");
-// Clases
 const Schedule = require("./Schedule");
-// Consts
-const regexp = /[=\n]/;
 
-/**
- * Read the data given from a schedule.txt file
- */
-fs.readFile("./input.txt", "utf8", (err, data) => {
-  if (err) {
-    console.error(err);
-    return;
-  }
-  // Removing blank spaces and spliting the data
-  let splited_data = data.toString().replace(" ", "").split(regexp);
-  pushData(splited_data);
-});
-
-/**
- * Iterates between the read data and creating an array of schedules
- * @param {*} data splited data
- */
-function pushData(data) {
-  let schedules = new Array();
-  // Iterating between the array
-  for (let i = 0; i < data.length; i += 2) {
-    // Instancing the schedule object
-    let sch = new Schedule(
-      data[i], // name
-      data[i + 1].toString().replace("\r", "").split(",") // array of schedules
-    );
-    // Pushing to the array of schedules
-    schedules.push(sch);
-  }
-  console.table(outputTable(schedules));
+function main() {
+  // Read the data given from a schedule.txt file
+  fs.readFile("./input.txt", "utf8", (err, data) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+    let regexp = /[=\n]/;
+    // Removing blank spaces and spliting the data
+    let splited_data = data.toString().replace(" ", "").split(regexp);
+    // Pushing the data
+    let schedules = new Array();
+    // Iterating between the array
+    for (let i = 0; i < splited_data.length; i += 2) {
+      // Instancing the schedule object
+      let sch = new Schedule(
+        splited_data[i], // name
+        splited_data[i + 1].toString().replace("\r", "").split(",") // array of schedules
+      );
+      // Pushing to the stack of schedules
+      schedules.push(sch);
+    }
+    // Showing a table with the output array
+    console.table(outputTable(schedules));
+  });
 }
 
 /**
@@ -43,7 +34,7 @@ function pushData(data) {
  * @returns Array of pairs with a counter of similarities between schedules
  */
 function outputTable(data) {
-  var output_table = new Array();
+  let output_table = new Array();
   // Iterating between the shedules array twice
   data.map((sch1) => {
     const name1 = sch1.getName;
@@ -85,3 +76,10 @@ function outputTable(data) {
   });
   return output_table;
 }
+
+main();
+
+module.exports = {
+  outputTable,
+  main,
+};

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node ./index",
-    "test": "jest"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/04zAM/ioet#readme",
   "devDependencies": {
-    "jest": "^27.3.1"
+    "chai": "^4.3.4",
+    "mocha": "^9.1.3"
   }
 }
