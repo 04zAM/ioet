@@ -44,7 +44,7 @@ function pushData(data) {
  */
 function outputTable(data) {
   var output_table = new Array();
-  // Iterating between the shedule array twice
+  // Iterating between the shedules array twice
   data.map((sch1) => {
     const name1 = sch1.getName;
     data.map((sch2) => {
@@ -52,6 +52,7 @@ function outputTable(data) {
       let counter = 0;
       // Comparing if the names are not the same ones
       if (name1 !== name2) {
+        // Iterating between the shedule array twice to comparing
         sch1.getSchedule.map((days1) => {
           const day1 = days1.toString().substring(0, 2);
           const entrance1 = days1.toString().substring(2).split("-")[0];
@@ -60,11 +61,14 @@ function outputTable(data) {
             const day2 = days2.toString().substring(0, 2);
             const entrance2 = days2.toString().substring(2).split("-")[0];
             const exit2 = days2.toString().substring(2).split("-")[1];
+            // Comparing the day for skiping
             if (day1 === day2) {
+              // Comparing the hours of entrance and exit for every day
               if (
                 (entrance1 >= entrance2 && entrance1 < exit2) ||
                 (entrance2 >= entrance1 && entrance2 < exit1)
               ) {
+                // If so a counter sums one coincidence between schedules
                 counter++;
               }
             }
